@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const router = express.Router();
 const URL = 'mongodb://localhost:27017/services';
 const PORT = 3222;
 
@@ -14,15 +12,18 @@ app.use(express.urlencoded());
 const servicesRoutes = require('../api/services/services.routes');
 app.use('/api' , servicesRoutes);
 
-router.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+'/index.html'));
-});
+const connect = require('connect');
+const serveStatic = require('serve-static');
 
 mongoose.connect(URL, function (err) {
     if (err) {
         console.log("Mongo error!", err);
     }
     console.log("Data base is ready!");
+
+    connect()
+        .use(serveStatic(__dirname))
+    //     .listen(PORT, () => console.log(`Server running on ${PORT}...`));
 
     app.listen(PORT, function () {
         console.log(
