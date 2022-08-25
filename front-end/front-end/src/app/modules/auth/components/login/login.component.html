@@ -1,0 +1,11 @@
+<h1>Login</h1>
+<span class="account" [routerLink]="['/auth/register']" >Don't have account ? Go to Register</span>
+<div class="auth-data">
+<span>Username</span>
+<input [(ngModel)]="username" type="text" placeholder="Username" />
+</div>
+<div class="auth-data">
+<span>Password</span>
+<input [(ngModel)]="password" type="password" placeholder="Password" />
+</div>
+<button (click)="login()">Login</button>

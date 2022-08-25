@@ -8,12 +8,16 @@ mongoose.Promise = global.Promise;
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(require('cors')());
 
 const servicesRoutes = require('../api/services/services.routes');
 app.use('/api', servicesRoutes);
 
 const authRoutes = require('../api/modules/auth/auth.routes');
 app.use('/api', authRoutes);
+
+const userRoutes = require('../api/modules/user/user.routes');
+app.use('/api', userRoutes);
 
 const connect = require('connect');
 const serveStatic = require('serve-static');
